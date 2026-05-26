@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | CRVMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body class="login-page">
+    <div class="login-wrap">
+        <div class="login-card">
+            <div class="college-header">
+                <strong>{{ college_name }}</strong>
+                <small>Resource & Venue Management</small>
+            </div>
+            
+            <h1 class="h4 text-center mb-4" style="color: var(--text-primary);">College Resource Booking System</h1>
+            
+            {% include 'partials/flash.html' %}
+            
+            <form method="POST" action="{{ url_for('login') }}" class="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="user_id">User ID</label>
+                    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="Enter your ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="role">Role</label>
+                    <select class="form-control" name="role" id="role" required>
+                        <option value="">Select your role</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Faculty/Teacher</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="login-button w-100">Sign In</button>
+            </form>
+            
+            <div class="login-hint">
+                <strong>Demo Credentials:</strong>
+                <div class="login-hint-item">
+                    <span>Student:</span>
+                    <code>220145 / stu123</code>
+                </div>
+                <div class="login-hint-item">
+                    <span>Faculty:</span>
+                    <code>CSE101 / fac123</code>
+                </div>
+                <div class="login-hint-item">
+                    <span>Admin:</span>
+                    <code>ADMIN01 / admin123</code>
+                </div>
+            </div>
+        </div>
+        <p class="text-center small text-muted mt-4">Developed for PBL Project | College Resource Management System</p>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
