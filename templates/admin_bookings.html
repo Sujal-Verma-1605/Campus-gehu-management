@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common_pages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/requests_bookings.css') }}">
+</head>
+<body>
+<div class="app-wrapper">
+    {% include 'partials/admin_sidebar.html' %}
+    <div class="main-content">
+        {% include 'partials/navbar.html' %}
+        <div class="page-content">
+            {% include 'partials/flash.html' %}
+            <h1 class="h5 mb-3">Booking Records</h1>
+            <form method="GET" class="mb-3"><input type="text" class="form-control form-control-sm w-auto d-inline-block" name="search" value="{{ search|default('') }}" placeholder="Search resource or date"></form>
+            <div class="panel">
+                <table class="table table-sm table-bordered" id="dataTable">
+                    <thead class="table-light"><tr><th>Resource</th><th>Date</th><th>Time</th><th>Booked By</th><th>Approved by</th><th>Type</th></tr></thead>
+                    <tbody>
+                        {% for b in bookings %}
+                        <tr>
+                            <td>{{ b.resource }}</td><td>{{ b.date }}</td><td>{{ b.start_time }}-{{ b.end_time }}</td>
+                            <td>{{ b.booked_by }}</td><td>{{ b.display_approved_by or b.approved_by or '-' }}</td><td>{{ b.role }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="6" class="text-center text-muted">No bookings available</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% include 'partials/footer.html' %}
+    </div>
+</div>
+{% include 'partials/logout_modal.html' %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

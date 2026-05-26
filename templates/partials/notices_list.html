@@ -1,0 +1,9 @@
+{% for n in notices %}
+<div class="panel mb-2 notice-item">
+    <h3 class="h6 mb-1">{{ n.title }}</h3>
+    <p class="mb-2 small">{{ n.message }}</p>
+    <p class="small text-muted mb-0">Posted: {{ n.posted_on }} | By: {{ n.posted_by }}</p>
+</div>
+{% else %}
+<div class="panel text-center text-muted py-4">No notices available</div>
+{% endfor %}

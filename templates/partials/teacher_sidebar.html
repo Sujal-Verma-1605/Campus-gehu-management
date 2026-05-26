@@ -1,0 +1,12 @@
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><strong>CRVMS</strong><small>Teacher</small></div>
+    <ul class="sidebar-nav">
+        <li><a href="{{ url_for('teacher_dashboard') }}" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+        <li><a href="{{ url_for('teacher_direct_booking') }}" class="{% if active_page == 'booking' %}active{% endif %}">Direct Booking</a></li>
+        <li><a href="{{ url_for('teacher_schedule') }}" class="{% if active_page == 'schedule' %}active{% endif %}">Today's Schedule</a></li>
+        <li><a href="{{ url_for('teacher_availability') }}" class="{% if active_page == 'availability' %}active{% endif %}">Resource Availability</a></li>
+        <li><a href="{{ url_for('teacher_notices') }}" class="{% if active_page == 'notices' %}active{% endif %}">Notices</a></li>
+        <li><a href="{{ url_for('teacher_feedback') }}" class="{% if active_page == 'feedback' %}active{% endif %}">Feedback</a></li>
+        <li><a href="#" data-logout-confirm>Logout</a></li>
+    </ul>
+</aside>

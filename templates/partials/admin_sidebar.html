@@ -1,0 +1,14 @@
+<aside class="sidebar sidebar-admin" id="sidebar">
+    <div class="sidebar-brand"><strong>CRVMS</strong><small>Admin</small></div>
+    <ul class="sidebar-nav">
+        <li><a href="{{ url_for('admin_dashboard') }}" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+        <li><a href="{{ url_for('admin_requests') }}" class="{% if active_page == 'requests' %}active{% endif %}">Student Requests</a></li>
+        <li><a href="{{ url_for('admin_bookings') }}" class="{% if active_page == 'bookings' %}active{% endif %}">Booking Records</a></li>
+        <li><a href="{{ url_for('admin_availability') }}" class="{% if active_page == 'availability' %}active{% endif %}">Resource Availability</a></li>
+        <li><a href="{{ url_for('admin_resources') }}" class="{% if active_page == 'resources' %}active{% endif %}">Resource Management</a></li>
+        <li><a href="{{ url_for('admin_notices') }}" class="{% if active_page == 'notices' %}active{% endif %}">Manage Notices</a></li>
+        <li><a href="{{ url_for('admin_feedback') }}" class="{% if active_page == 'feedback' %}active{% endif %}">Feedback</a></li>
+        <li><a href="{{ url_for('admin_reports') }}" class="{% if active_page == 'reports' %}active{% endif %}">Reports</a></li>
+        <li><a href="#" data-logout-confirm>Logout</a></li>
+    </ul>
+</aside>

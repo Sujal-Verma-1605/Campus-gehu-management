@@ -1,0 +1,20 @@
+<nav class="top-navbar">
+    <div class="navbar-branding">
+        <span class="college-name">{{ college_name }}</span>
+        <span class="navbar-datetime">
+            <i class="bi bi-calendar3"></i> <span id="currentDate"></span>
+            &nbsp;|&nbsp;
+            <i class="bi bi-clock"></i> <span id="currentTime"></span>
+        </span>
+    </div>
+    <div class="navbar-user dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            {{ current_user_name }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><span class="dropdown-item-text small">ID: {{ current_user_id }}</span></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#" data-logout-confirm>Logout</a></li>
+        </ul>
+    </div>
+</nav>

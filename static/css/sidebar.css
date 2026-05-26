@@ -1,0 +1,16 @@
+
+/* Sidebar specifics; core layout and tokens are in base.css */
+
+.sidebar { color: var(--text-primary); }
+.sidebar .sidebar-brand strong { font-size: var(--text-lg); font-weight:700; }
+.sidebar .sidebar-brand small { color: var(--text-tertiary); font-size: var(--text-xs); }
+.sidebar-nav { padding: var(--space-md) 0; }
+.sidebar-nav a { color: var(--text-secondary); font-weight:500; transition: all var(--transition-base); }
+.sidebar-nav a:hover { color: var(--text-primary); }
+.sidebar-nav a.active { color: var(--primary); }
+
+/* Small-screen adjustments kept minimal; base.css contains wider responsive rules */
+@media (max-width: 480px) {
+  .sidebar { padding: var(--space-md) 0; }
+  .sidebar-nav a { padding: var(--space-sm) var(--space-lg); }
+}

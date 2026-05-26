@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Requests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_requests.css') }}">
+</head>
+<body>
+<div class="app-wrapper">
+    {% include 'partials/admin_sidebar.html' %}
+    <div class="main-content">
+        {% include 'partials/navbar.html' %}
+        <div class="page-content">
+            {% include 'partials/flash.html' %}
+            <h1 class="h5 mb-3">Student Requests</h1>
+            <form method="GET" class="row g-2 mb-3">
+                <div class="col-md-5"><input type="text" class="form-control form-control-sm" name="search" value="{{ search|default('') }}" placeholder="Search"></div>
+                <div class="col-md-4">
+                    <select class="form-select form-select-sm" name="status" onchange="this.form.submit()">
+                        <option value="">All</option>
+                        <option value="Pending" {% if status_filter=='Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Approved" {% if status_filter=='Approved' %}selected{% endif %}>Approved</option>
+                        <option value="Rejected" {% if status_filter=='Rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </div>
+            </form>
+            {% for req in requests %}
+            <div class="panel mb-3 request-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="mb-1"><strong>{{ req.event_title }}</strong> — {{ req.resource }}</p>
+                        <p class="small mb-1">Student: {{ req.student_name }} ({{ req.student_id }})</p>
+                        <p class="small mb-1">Date: {{ req.date }} | Time: {{ req.start_time }}-{{ req.end_time }}</p>
+                        <p class="small mb-1">Participants: {{ req.attendees }}</p>
+                        <p class="small mb-1"><strong>Purpose:</strong> {{ req.reason }}</p>
+                        <p class="small mb-1">Requested On: {{ req.requested_on or '-' }}</p>
+                        <p class="small mb-0">
+                            Recommendation:
+                            {% if req.recommendation_file %}
+                            <a href="{{ url_for('static', filename=req.recommendation_file) }}" target="_blank">View file</a>
+                            {% else %}
+                            <span class="text-danger">Not uploaded</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <span class="badge text-bg-{% if req.status=='Approved' %}success{% elif req.status=='Rejected' %}danger{% else %}warning{% endif %} mb-2">{{ req.status }}</span>
+                        {% if req.status == 'Pending' %}
+                        <div>
+                            <form method="POST" action="{{ url_for('admin_approve', request_id=req.id) }}" class="d-inline">
+                                <button type="button" class="btn btn-sm btn-success" data-confirm-action {% if not req.recommendation_file %}disabled title="Recommendation required"{% endif %}>Approve</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('admin_reject', request_id=req.id) }}" class="d-inline">
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-confirm-action>Reject</button>
+                            </form>
+                        </div>
+                        {% if not req.recommendation_file %}
+                        <p class="small text-danger mt-1">Cannot approve without recommendation file.</p>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="panel text-center text-muted py-4">No requests found</div>
+            {% endfor %}
+        </div>
+        {% include 'partials/footer.html' %}
+    </div>
+</div>
+{% include 'partials/logout_modal.html' %}
+{% include 'partials/confirm_modal.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

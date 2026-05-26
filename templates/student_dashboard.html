@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student_dashboard.css') }}">
+</head>
+<body>
+<div class="app-wrapper">
+    {% include 'partials/student_sidebar.html' %}
+    <div class="main-content">
+        {% include 'partials/navbar.html' %}
+        <div class="page-content">
+            {% include 'partials/flash.html' %}
+            <h1 class="h5 mb-3">Hello, {{ current_user_name }}</h1>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4"><div class="stat-box"><span>Available Resources</span><strong>{{ available_resources }}</strong></div></div>
+                <div class="col-md-4"><div class="stat-box"><span>Pending Requests</span><strong>{{ pending }}</strong></div></div>
+                <div class="col-md-4"><div class="stat-box"><span>Approved Requests</span><strong>{{ approved }}</strong></div></div>
+            </div>
+            <a href="{{ url_for('request_resource') }}" class="btn btn-primary btn-sm mb-4">Request Resource</a>
+            <div class="panel mb-4">
+                <h2 class="h6">Recent Requests</h2>
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light"><tr><th>Event</th><th>Resource</th><th>Date</th><th>Status</th></tr></thead>
+                    <tbody>
+                        {% for r in recent_requests %}
+                        <tr>
+                            <td>{{ r.event_title }}</td><td>{{ r.resource }}</td><td>{{ r.date }}</td>
+                            <td><span class="badge text-bg-{% if r.status == 'Approved' %}success{% elif r.status == 'Rejected' %}danger{% else %}warning{% endif %}">{{ r.status }}</span></td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="4" class="text-muted text-center">No requests found</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="small"><a href="{{ url_for('student_availability') }}">View Resource Availability</a> | <a href="{{ url_for('student_notices') }}">Notices</a></p>
+        </div>
+        {% include 'partials/footer.html' %}
+    </div>
+</div>
+{% include 'partials/logout_modal.html' %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

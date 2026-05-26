@@ -1,0 +1,12 @@
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><strong>CRVMS</strong><small>Student</small></div>
+    <ul class="sidebar-nav">
+        <li><a href="{{ url_for('student_dashboard') }}" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+        <li><a href="{{ url_for('request_resource') }}" class="{% if active_page == 'request' %}active{% endif %}">Request Resource</a></li>
+        <li><a href="{{ url_for('my_requests') }}" class="{% if active_page == 'my_requests' %}active{% endif %}">My Requests</a></li>
+        <li><a href="{{ url_for('student_availability') }}" class="{% if active_page == 'availability' %}active{% endif %}">Resource Availability</a></li>
+        <li><a href="{{ url_for('student_notices') }}" class="{% if active_page == 'notices' %}active{% endif %}">Notices</a></li>
+        <li><a href="{{ url_for('student_feedback') }}" class="{% if active_page == 'feedback' %}active{% endif %}">Feedback</a></li>
+        <li><a href="#" data-logout-confirm>Logout</a></li>
+    </ul>
+</aside>

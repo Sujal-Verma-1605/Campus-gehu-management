@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table table-sm table-bordered mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Resource</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in availability_rows %}
+            <tr>
+                <td>{{ row.resource }}</td>
+                <td>{{ row.date }}</td>
+                <td>{{ row.time_slot }}</td>
+                <td><span class="badge text-bg-secondary">Booked</span></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-muted py-4">
+                    No booked slots found for the selected filters.
+                    <br><small>Resources are available for booking between 08:00 AM and 05:00 PM.</small>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<p class="small text-muted mb-0">Only confirmed bookings are shown. Slots not listed are available.</p>

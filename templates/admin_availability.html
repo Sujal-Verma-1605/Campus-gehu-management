@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Availability</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common_pages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_availability.css') }}">
+</head>
+<body>
+<div class="app-wrapper">
+    {% include 'partials/admin_sidebar.html' %}
+    <div class="main-content">
+        {% include 'partials/navbar.html' %}
+        <div class="page-content">
+            {% include 'partials/flash.html' %}
+            
+            <div class="page-header">
+                <h1 class="page-title">Resource Availability</h1>
+                <p class="page-subtitle">View all scheduled resource bookings and availability</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <form method="GET" class="filter-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Resource</label>
+                        <select name="resource" class="filter-input">
+                            <option value="">All resources</option>
+                            {% for r in resources %}
+                            <option value="{{ r }}" {% if resource_filter == r %}selected{% endif %}>{{ r }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Date</label>
+                        <input type="date" name="date" class="filter-input" value="{{ date_filter }}">
+                    </div>
+                    <div class="filter-actions">
+                        <button type="submit" class="filter-btn filter-btn-primary">Filter</button>
+                        <a href="{{ url_for('admin_availability') }}" class="filter-btn filter-btn-secondary">Reset</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Availability Table -->
+            <div class="content-container">
+                {% include 'partials/dynamic_availability_table.html' %}
+            </div>
+        </div>
+        {% include 'partials/footer.html' %}
+    </div>
+</div>
+{% include 'partials/logout_modal.html' %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

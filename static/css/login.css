@@ -1,0 +1,27 @@
+
+/* Login page styles using the unified design system in base.css */
+
+.login-page { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--space-lg); background: linear-gradient(180deg, var(--bg-primary), var(--bg-tertiary)); }
+
+.login-wrap { width:100%; max-width:420px; z-index:10; }
+
+.login-card { background: var(--bg-secondary); border:1px solid var(--gray-100); border-radius: var(--radius-xl); padding: var(--space-xl); box-shadow: var(--shadow-md); }
+
+.college-header { text-align:center; margin-bottom: var(--space-lg); }
+.college-header strong { display:block; font-size:var(--text-2xl); color:var(--primary); font-weight:700; margin-bottom: var(--space-sm); }
+.college-header small { display:block; font-size:var(--text-sm); color:var(--text-secondary); }
+
+.login-form { display:flex; flex-direction:column; gap:var(--space-md); }
+.form-group label { font-weight:600; color:var(--text-primary); font-size:var(--text-sm); }
+.form-group input, .form-group select { width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); }
+.form-group input:focus, .form-group select:focus { border-color:var(--primary); box-shadow: 0 0 0 4px rgba(79,70,229,0.06); }
+
+.login-button { width:100%; padding:0.75rem; border-radius:var(--radius-md); background: linear-gradient(180deg,var(--primary),var(--primary-dark)); color:#fff; border:none; font-weight:700; }
+
+.login-hint { margin-top:var(--space-md); padding:var(--space-md); border-radius:var(--radius-md); background:transparent; color:var(--text-secondary); border-top:1px solid var(--gray-100); }
+.login-hint code { background:var(--bg-tertiary); padding:0.125rem var(--space-sm); border-radius:4px; font-family:var(--font-mono); color:var(--primary); }
+
+@media (max-width: 480px) {
+  .login-card { padding: var(--space-lg); }
+  .college-header strong { font-size: var(--text-xl); }
+}
